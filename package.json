@@ -1,0 +1,24 @@
+{
+  "name": "the-project-cafe-ahmedabad-concept",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Self-initiated website redesign concept for The Project Cafe Ahmedabad by Cortex.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "preview": "npx serve@latest out"
+  },
+  "dependencies": {
+    "next": "^15.3.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.10",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.10",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+/* Dark mode via class strategy: <html class="dark"> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Georgia", "Times New Roman", serif;
+
+  /* Warm restaurant palette. Preserved approved brand colors. */
+  --color-ember-50: #fdf6f0;
+  --color-ember-100: #f9e8da;
+  --color-ember-200: #f2cdb0;
+  --color-ember-400: #d97642;
+  --color-ember-500: #c65d28;
+  --color-ember-600: #a9481c;
+  --color-char-800: #2b211c;
+  --color-char-900: #1a1310;
+  --color-char-950: #100c0a;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Warm paper texture for editorial menu & content */
+.paper {
+  background-color: var(--color-ember-50);
+  background-image:
+    radial-gradient(at 10% 0%, rgba(242, 205, 176, 0.35) 0px, transparent 50%),
+    radial-gradient(at 90% 100%, rgba(249, 232, 218, 0.5) 0px, transparent 55%);
+}
+
+.dark .paper {
+  background-color: var(--color-char-900);
+  background-image:
+    radial-gradient(at 10% 0%, rgba(120, 53, 15, 0.22) 0px, transparent 50%),
+    radial-gradient(at 90% 100%, rgba(43, 33, 28, 0.8) 0px, transparent 55%);
+}
+
+/* Dotted leader between a menu item and its price */
+.leader {
+  flex: 1 1 auto;
+  margin: 0 0.75rem;
+  border-bottom: 1px dotted currentColor;
+  opacity: 0.28;
+  transform: translateY(-0.25rem);
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+/* Form inputs */
+.input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 0.85rem 1.15rem;
+  font-size: 0.925rem;
+  color: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input::placeholder {
+  color: currentColor;
+  opacity: 0.45;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-ember-500);
+  box-shadow: 0 0 0 3px rgba(198, 93, 40, 0.18);
+}
+
+.dark .input {
+  border-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.6;
+}
+
+/* Scroll-reveal system */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Image reveal animations */
+.img-reveal {
+  overflow: hidden;
+  position: relative;
+}
+
+.img-reveal img {
+  transform: scale(1.08);
+  opacity: 0;
+  transition:
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.img-reveal.is-visible img {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Hide scrollbar for horizontal containers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Editorial line entrance */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroScaleFade {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scrollBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.animate-hero-1 {
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-hero-2 {
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.16s forwards;
+  opacity: 0;
+}
+
+.animate-hero-3 {
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.32s forwards;
+  opacity: 0;
+}
+
+.animate-hero-4 {
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.48s forwards;
+  opacity: 0;
+}
+
+.animate-hero-bg {
+  animation: heroScaleFade 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scroll-line {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+
+/* Editorial line separator */
+.editorial-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(198, 93, 40, 0.35) 0%,
+    currentColor 50%,
+    rgba(198, 93, 40, 0.15) 100%
+  );
+  opacity: 0.2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .img-reveal img,
+  .animate-hero-1,
+  .animate-hero-2,
+  .animate-hero-3,
+  .animate-hero-4,
+  .animate-hero-bg,
+  .animate-scroll-line {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
